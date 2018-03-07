@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}添加小区故障{% endblock %}
+{% block mainbody %}
+    <div class="container">
+        <div style="padding-bottom: 10px">
+            <a href="{% url 'index' %}" class="label label-success">首页</a>
+            <span>  > </span>
+            <span class="label label-success">添加小区故障</span>
+        </div>
+        <div style="padding-bottom: 10px;">
+            <form id="XiaoQuGuZhang_form" action="{% url 'xiaoquguzhang:add' %}" method="post">
+                {% csrf_token %}
+
+                <span>用户账号：</span>{{ XiaoQuGuZhang_form.account }}
+                <span>NAS（IP）：</span>{{ XiaoQuGuZhang_form.bars }}
+                <input type="submit" value="新增故障记录" onclick="$">
+            </form>
+        </div>
+        <div >
+            <table class="table table-bordered">
+
+                <tr>
+                    <th>用户账号</th>
+                    <th>接入设备</th>
+                    <th>报障时间</th>
+                </tr>
+                {% for XiaoQuGuZhang in XiaoQuGuZhang_list %}
+                    <tr>
+                        <td>{{ XiaoQuGuZhang.account }}</td>
+                        <td>{{ XiaoQuGuZhang.bars }}</td>
+                        <td>{{ XiaoQuGuZhang.pub_date }}</td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
+
